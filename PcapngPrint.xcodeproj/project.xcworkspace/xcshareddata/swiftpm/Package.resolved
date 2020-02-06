@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "PackageSwiftPcapng",
+        "repositoryURL": "https://github.com/darrellroot/PackageSwiftPcapng.git",
+        "state": {
+          "branch": null,
+          "revision": "9f5385a9bee117045cad3b5b37e27f820519e44b",
+          "version": "0.0.22"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "74d7b91ceebc85daf387ebb206003f78813f71aa",
+          "version": "1.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

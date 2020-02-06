@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2F0D6BC123EB705200D4A89C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D6BC023EB705200D4A89C /* main.swift */; };
+		2F0D6BC923EB708200D4A89C /* PackageSwiftPcapng in Frameworks */ = {isa = PBXBuildFile; productRef = 2F0D6BC823EB708200D4A89C /* PackageSwiftPcapng */; };
+		2F0D6BCB23EB712D00D4A89C /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D6BCA23EB712D00D4A89C /* ArgumentParser.swift */; };
+		2F5451CC23ECBF1900207DA3 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 2F5451CB23ECBF1900207DA3 /* Logging */; };
+		2F5451CE23ECBFFD00207DA3 /* DarrellLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5451CD23ECBFFD00207DA3 /* DarrellLogHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,8 @@
 /* Begin PBXFileReference section */
 		2F0D6BBD23EB705200D4A89C /* PcapngPrint */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PcapngPrint; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0D6BC023EB705200D4A89C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2F0D6BCA23EB712D00D4A89C /* ArgumentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentParser.swift; sourceTree = "<group>"; };
+		2F5451CD23ECBFFD00207DA3 /* DarrellLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarrellLogHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5451CC23ECBF1900207DA3 /* Logging in Frameworks */,
+				2F0D6BC923EB708200D4A89C /* PackageSwiftPcapng in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				2F0D6BC023EB705200D4A89C /* main.swift */,
+				2F0D6BCA23EB712D00D4A89C /* ArgumentParser.swift */,
+				2F5451CD23ECBFFD00207DA3 /* DarrellLogHandler.swift */,
 			);
 			path = PcapngPrint;
 			sourceTree = "<group>";
@@ -78,6 +88,10 @@
 			dependencies = (
 			);
 			name = PcapngPrint;
+			packageProductDependencies = (
+				2F0D6BC823EB708200D4A89C /* PackageSwiftPcapng */,
+				2F5451CB23ECBF1900207DA3 /* Logging */,
+			);
 			productName = PcapngPrint;
 			productReference = 2F0D6BBD23EB705200D4A89C /* PcapngPrint */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +120,10 @@
 				Base,
 			);
 			mainGroup = 2F0D6BB423EB705200D4A89C;
+			packageReferences = (
+				2F0D6BC723EB708200D4A89C /* XCRemoteSwiftPackageReference "PackageSwiftPcapng" */,
+				2F5451CA23ECBF1900207DA3 /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			productRefGroup = 2F0D6BBE23EB705200D4A89C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -121,6 +139,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F0D6BC123EB705200D4A89C /* main.swift in Sources */,
+				2F0D6BCB23EB712D00D4A89C /* ArgumentParser.swift in Sources */,
+				2F5451CE23ECBFFD00207DA3 /* DarrellLogHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +304,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2F0D6BC723EB708200D4A89C /* XCRemoteSwiftPackageReference "PackageSwiftPcapng" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/darrellroot/PackageSwiftPcapng.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.19;
+			};
+		};
+		2F5451CA23ECBF1900207DA3 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F0D6BC823EB708200D4A89C /* PackageSwiftPcapng */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F0D6BC723EB708200D4A89C /* XCRemoteSwiftPackageReference "PackageSwiftPcapng" */;
+			productName = PackageSwiftPcapng;
+		};
+		2F5451CB23ECBF1900207DA3 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F5451CA23ECBF1900207DA3 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2F0D6BB523EB705200D4A89C /* Project object */;
 }
