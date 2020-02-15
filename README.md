@@ -16,7 +16,7 @@ Command-line tool to print out structure of pcap or pcapng file
 % ./PcapngPrint ~/test/a.pcap
 File /Users/droot/test/a.pcap Format: pcap
   MagicNumber: 0xa1b2c3d4
-  Version: 2.(pcap.versionMinor)
+  Version: 2.4
   TimeZone correction: 0
   Timestamp accuracy: 0
   Snaplen: 262144
