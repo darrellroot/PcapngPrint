@@ -29,34 +29,40 @@ if arguments.showLogs {
     Pcapng.logger.logLevel = .info
 }
 
-func decodePcapng(data: Data, file: String) {
-    
+func decodePcap(data: Data, file: String) {
+    print("File \(file) Format: pcap")
+    do {
+        let pcap = try Pcap(data: data)
+        let magicNumber = String(format: "%x",pcap.magicNumber)
+        print("  MagicNumber: 0x\(magicNumber)")
+        print("  Version: \(pcap.versionMajor).\(pcap.versionMinor)")
+        print("  TimeZone correction: \(pcap.thiszone)")
+        print("  Timestamp accuracy: \(pcap.sigfigs)")
+        print("  Snaplen: \(pcap.snaplen)")
+        print("  Network type: \(pcap.network)")
+        print("  \(pcap.packets.count) packets")
+        switch pcap.bigEndian {
+        case false:
+            print("  Little Endian")
+        case true:
+            print("  Big Endian")
+        }
+        for (count,packet) in pcap.packets.enumerated() {
+            print("  Packet \(count) \(packet.packetData.count) bytes")
+            print("    \(packet.date)")
+            print("    capturedLength \(packet.capturedLength) originalLength \(packet.originalLength)")
+        }
+    } catch {
+        print("PcapngPrint: unable to decode file \(file) as pcap error \(error)")
+        return
+    }
 }
-
-for file in arguments.files {
-    let fileManager = FileManager()
-    guard let data = fileManager.contents(atPath: file) else {
-        debugPrint("PcapngPrint: unable to open file \(file)")
-        continue
-    }
-    let pcapType = PcapType.detect(data: data)
-    
-    switch pcapType {
-        
-    case .pcap:
-        <#code#>
-    case .pcapng:
-        decodePcapng(data: data, file: file)
-        
-    case .neither:
-        print("PcapngPrint: File \(file) does not appear to be pcap or pcapng")
-        exit(EXIT_FAILURE)
-    }
+func decodePcapng(data: Data, file: String) {
+    print("File \(file) Format: pcapng")
     guard let pcapng = Pcapng(data: data) else {
         print("PcapngPrint: unable to decode file \(file) as pcapng")
-        continue
+        return
     }
-    print("File \(file)")
     for (segmentCount,segment) in pcapng.segments.enumerated() {
         print("  File \(file) segment \(segmentCount)")
         print("    blockLength \(segment.blockLength)")
@@ -141,6 +147,28 @@ for file in arguments.files {
                 fatalError("unknown packet type detected, add coverage")
             }
         }
+    }
+
+}
+
+for file in arguments.files {
+    let fileManager = FileManager()
+    guard let data = fileManager.contents(atPath: file) else {
+        debugPrint("PcapngPrint: unable to open file \(file)")
+        continue
+    }
+    let pcapType = PcapType.detect(data: data)
+    
+    switch pcapType {
+        
+    case .pcap:
+        decodePcap(data: data, file: file)
+    case .pcapng:
+        decodePcapng(data: data, file: file)
+        
+    case .neither:
+        print("PcapngPrint: File \(file) does not appear to be pcap or pcapng")
+        exit(EXIT_FAILURE)
     }
 }
 exit(EXIT_SUCCESS)
