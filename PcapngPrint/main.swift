@@ -29,14 +29,31 @@ if arguments.showLogs {
     Pcapng.logger.logLevel = .info
 }
 
+func decodePcapng(data: Data, file: String) {
+    
+}
+
 for file in arguments.files {
     let fileManager = FileManager()
     guard let data = fileManager.contents(atPath: file) else {
         debugPrint("PcapngPrint: unable to open file \(file)")
         continue
     }
+    let pcapType = PcapType.detect(data: data)
+    
+    switch pcapType {
+        
+    case .pcap:
+        <#code#>
+    case .pcapng:
+        decodePcapng(data: data, file: file)
+        
+    case .neither:
+        print("PcapngPrint: File \(file) does not appear to be pcap or pcapng")
+        exit(EXIT_FAILURE)
+    }
     guard let pcapng = Pcapng(data: data) else {
-        debugPrint("Pcapng: unable to decode file \(file)")
+        print("PcapngPrint: unable to decode file \(file) as pcapng")
         continue
     }
     print("File \(file)")
@@ -106,8 +123,8 @@ for file in arguments.files {
                 print("      blockType \(packet.blockType)")
                 print("      blockLength \(packet.blockLength)")
                 print("      interfaceId \(packet.interfaceId)")
-                print("      timestampHigh \(packet.timestampHigh)")
-                print("      timestampLow \(packet.timestampLow)")
+                print("      timestamp \(packet.timestamp)")
+                print("      date \(packet.date)")
                 print("      capturedLength \(packet.capturedLength)")
                 print("      originalLength \(packet.originalLength)")
                 print("      packet data \(packet.packetData.count) bytes")
@@ -126,4 +143,5 @@ for file in arguments.files {
         }
     }
 }
+exit(EXIT_SUCCESS)
 
